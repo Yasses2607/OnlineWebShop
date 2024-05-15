@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voedingswinkel - Winkelwagen</title>
+    <style>
+        /* Stijlen kunnen hier worden toegevoegd voor een betere opmaak */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Voedingswinkel</h1>
+        <a href="#">Winkelwagen</a> <!-- Hier zou een link naar de winkelwagen moeten komen -->
+    </header>
+
+    <section id="producten">
+        <div class="product">
+            <img src="product1.jpg" alt="Product 1">
+            <h2>Product 1</h2>
+            <p>Beschrijving van product 1.</p>
+            <p>Prijs: €10</p>
+            <button onclick="addToCart(1)">Voeg toe aan winkelwagen</button>
+        </div>
+        <div class="product">
+            <img src="product2.jpg" alt="Product 2">
+            <h2>Product 2</h2>
+            <p>Beschrijving van product 2.</p>
+            <p>Prijs: €15</p>
+            <button onclick="addToCart(2)">Voeg toe aan winkelwagen</button>
+        </div>
+        <!-- Voeg meer producten toe zoals hierboven -->
+    </section>
+
+    <div id="winkelwagen">
+        <h2>Winkelwagen</h2>
+        <ul id="winkelwagen-lijst">
+            <!-- Hier worden producten in de winkelwagen weergegeven -->
+        </ul>
+        <p>Totaal: <span id="totaal">€0</span></p>
+        <button onclick="checkout()">Afrekenen</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Voedingswinkel. Alle rechten voorbehouden.</p>
+    </footer>
+
+    <script>
+        // JavaScript-functionaliteit voor het toevoegen van producten aan de winkelwagen en afrekenen
+        let winkelwagenItems = [];
+
+        function addToCart(productId) {
+            // Voeg product toe aan de winkelwagen-items
+            winkelwagenItems.push(productId);
+
+            // Update de weergave van de winkelwagen
+            updateCartView();
+        }
+
+        function updateCartView() {
+            const winkelwagenLijst = document.getElementById('winkelwagen-lijst');
+            winkelwagenLijst.innerHTML = '';
+
+            let totaalPrijs = 0;
+
+            winkelwagenItems.forEach(productId => {
+                const product = getProductById(productId);
+                totaalPrijs += product.prijs;
+                winkelwagenLijst.innerHTML += `<li>${product.naam} - €${product.prijs}</li>`;
+            });
+
+            document.getElementById('totaal').innerText = `€${totaalPrijs.toFixed(2)}`;
+        }
+
+        function getProductById(productId) {
+            // Hier zou je normaal gesproken productinformatie uit een database halen op basis van het productId
+            // Voor nu retourneren we alleen een dummy-product
+            return {
+                naam: `Product ${productId}`,
+                prijs: productId * 5 // Dummy prijs berekening
+            };
+        }
+
+        function checkout() {
+            // Hier zou je de checkout-functionaliteit implementeren, zoals het verwerken van betalingen en het opslaan van bestellingen
+            alert('Dit is een dummy checkout-functie. Werkelijke functionaliteit moet worden geïmplementeerd.');
+        }
+    </script>
+</body>
+</html>
